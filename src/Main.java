@@ -6,7 +6,8 @@
 
 /**
  *
- * @author Guilherme
+ * @author Guilherme Henrique Mello e Almeida
+ * @author Luiz Miguel Jarduli Leite
  */
 public class Main {
     public static void main(String[] args) {
