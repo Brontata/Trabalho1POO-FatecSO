@@ -10,7 +10,7 @@ package fatec.poo.model;
  * @author Guilherme Henrique Mello e Almeida
  * @author Luiz Miguel Jarduli Leite
  */
-public class Cliente extends Pessoa{
+public class Cliente extends Pessoa{ 
     
     private double limiteCred;
     private double limiteDisp;
