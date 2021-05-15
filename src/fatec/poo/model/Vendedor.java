@@ -5,11 +5,43 @@
  */
 package fatec.poo.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Guilherme Henrique Mello e Almeida
  * @author Luiz Miguel Jarduli Leite
  */
-public class Vendedor {
+public class Vendedor extends Pessoa{
+    private double salarioBase;
+    private double taxaComissao;
+    private ArrayList<Pedido> pedidos; // multiplicidade 0..*
+    
+    public Vendedor(String cpf, String nome, double salarioBase) {
+        super(cpf,nome);
+        this.salarioBase = salarioBase;
+        pedidos = new ArrayList<Pedido>();
+    }
+    
+    public void addPedido(Pedido p) {
+        pedidos.add(p);
+        p.setVendedor(this);
+    }
+    public double getSalarioBase() {
+        return salarioBase;
+    }
+    
+    public double getTaxaComissao() {
+        return taxaComissao;
+    }
+
+    public void setSalarioBase(double salarioBase) {
+        this.salarioBase = salarioBase;
+    }
+
+    public void setTaxaComissao(double taxaComissao) {
+        this.taxaComissao = taxaComissao;
+    }
+    
     
 }

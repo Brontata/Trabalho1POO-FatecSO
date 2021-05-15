@@ -5,6 +5,8 @@
  */
 package fatec.poo.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Guilherme Henrique Mello e Almeida
@@ -14,11 +16,18 @@ public class Cliente extends Pessoa{
     
     private double limiteCred;
     private double limiteDisp;
+    private ArrayList<Pedido> pedidos;
 
     public Cliente(double limiteCred, String cpf, String nome) {
         super(cpf, nome);
         this.limiteCred = limiteCred;
-        limiteDisp = limiteCred;
+        this.limiteDisp = limiteCred;
+        pedidos = new ArrayList<Pedido>();
+    }
+    
+    public void addPedido(Pedido p) {
+        pedidos.add(p);
+        p.setCliente(this);
     }
     
     public double getLimiteCred() {
