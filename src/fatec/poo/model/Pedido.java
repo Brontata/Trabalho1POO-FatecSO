@@ -67,10 +67,19 @@ public class Pedido {
     public void setVendedor(Vendedor v) {
         this.vendedor = v;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
     
     public void addItemPedido(ItemPedido ip) {
         itemPedidos.add(ip);
         ip.setPedido(this);
         this.cliente.setLimiteCred(this.cliente.getLimiteCred() - ip.getProduto().getPreco());
     }
+    
 }
