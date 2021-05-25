@@ -5,12 +5,15 @@
  */
 package fatec.poo.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Guilherme
  */
 public class GuiMenu extends javax.swing.JFrame {
     GuiCliente guiCliente = new GuiCliente();
+    GuiVendedor guiVendedor = new GuiVendedor();
     
     public GuiMenu() {
         initComponents();
@@ -29,13 +32,18 @@ public class GuiMenu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnClientes = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnVendedores = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de vendas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jMenu1.setLabel("Cadastros");
 
@@ -47,8 +55,13 @@ public class GuiMenu extends javax.swing.JFrame {
         });
         jMenu1.add(btnClientes);
 
-        jMenuItem2.setLabel("Vendedores");
-        jMenu1.add(jMenuItem2);
+        btnVendedores.setLabel("Vendedores");
+        btnVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVendedoresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnVendedores);
 
         jMenuItem3.setLabel("Produtos");
         jMenu1.add(jMenuItem3);
@@ -81,6 +94,14 @@ public class GuiMenu extends javax.swing.JFrame {
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         guiCliente.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresActionPerformed
+        guiVendedor.setVisible(true);
+    }//GEN-LAST:event_btnVendedoresActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -119,10 +140,10 @@ public class GuiMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnClientes;
+    private javax.swing.JMenuItem btnVendedores;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
