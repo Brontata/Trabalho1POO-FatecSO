@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class GuiMenu extends javax.swing.JFrame {
     GuiCliente guiCliente = new GuiCliente();
     GuiVendedor guiVendedor = new GuiVendedor();
+    GuiProduto guiProduto = new GuiProduto();
     
     public GuiMenu() {
         initComponents();
@@ -29,13 +30,18 @@ public class GuiMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnClientes = new javax.swing.JMenuItem();
         btnVendedores = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        btnProdutos = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        btnSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de vendas");
@@ -63,8 +69,22 @@ public class GuiMenu extends javax.swing.JFrame {
         });
         jMenu1.add(btnVendedores);
 
-        jMenuItem3.setLabel("Produtos");
-        jMenu1.add(jMenuItem3);
+        btnProdutos.setLabel("Produtos");
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnProdutos);
+        jMenu1.add(jSeparator1);
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnSair);
 
         jMenuBar1.add(jMenu1);
 
@@ -103,6 +123,14 @@ public class GuiMenu extends javax.swing.JFrame {
        System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        guiProduto.setVisible(true);
+    }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,11 +168,14 @@ public class GuiMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnClientes;
+    private javax.swing.JMenuItem btnProdutos;
+    private javax.swing.JMenuItem btnSair;
     private javax.swing.JMenuItem btnVendedores;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
