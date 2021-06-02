@@ -79,7 +79,7 @@ public class Pedido {
     public void addItemPedido(ItemPedido ip) {
         itemPedidos.add(ip);
         ip.setPedido(this);
-        this.cliente.setLimiteCred(this.cliente.getLimiteCred() - ip.getProduto().getPreco());
+        this.cliente.setLimiteCred(this.cliente.getLimiteCred() - (ip.getProduto().getPreco() * ip.getQtdeVendida()));
     }
     
 }
