@@ -5,6 +5,9 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.model.Pessoa;
+import fatec.poo.model.Produto;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -164,6 +167,8 @@ public class GuiMenu extends javax.swing.JFrame {
                 new GuiMenu().setVisible(true);
             }
         });
+        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -178,4 +183,6 @@ public class GuiMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
+    private ArrayList<Pessoa> cadCliVend= new ArrayList<Pessoa>();
+    private ArrayList<Produto>  cadProd= new ArrayList<Produto>();
 }
