@@ -1,4 +1,5 @@
 
+import fatec.poo.util.ValidaCPF;
 import fatec.poo.view.GuiMenu;
 
 /*
@@ -17,5 +18,6 @@ public class Main {
         System.out.println("Hello world!");
         GuiMenu menu = new GuiMenu();
         menu.setVisible(true);
+        
     }
 }
