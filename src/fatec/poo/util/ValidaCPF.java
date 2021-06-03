@@ -14,6 +14,8 @@ import java.util.InputMismatchException;
 public class ValidaCPF {
 
     public static boolean isValido(String CPF) {
+    CPF = CPF.substring(0, 3) + CPF.substring(4, 7) + CPF.substring(8, 11) + CPF.substring(12, 14);
+
         if (CPF.equals("00000000000") || CPF.equals("11111111111")
             || CPF.equals("22222222222") || CPF.equals("33333333333")
             || CPF.equals("44444444444") || CPF.equals("55555555555")
