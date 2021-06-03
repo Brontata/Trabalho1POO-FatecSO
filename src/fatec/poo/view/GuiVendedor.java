@@ -5,7 +5,11 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.model.Pessoa;
+import fatec.poo.model.Vendedor;
 import fatec.poo.util.ValidaCPF;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +20,8 @@ public class GuiVendedor extends javax.swing.JFrame {
     /**
      * Creates new form GuiCliente
      */
-    public GuiVendedor() {
+    public GuiVendedor(ArrayList<Pessoa> cadPessoa) {
+        cadastroVend = cadPessoa;
         initComponents();
     }
 
@@ -137,6 +142,11 @@ public class GuiVendedor extends javax.swing.JFrame {
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.setPreferredSize(new java.awt.Dimension(99, 25));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Inserir.png"))); // NOI18N
         btnIncluir.setText("Incluir");
@@ -144,11 +154,21 @@ public class GuiVendedor extends javax.swing.JFrame {
         btnIncluir.setMaximumSize(new java.awt.Dimension(99, 25));
         btnIncluir.setMinimumSize(new java.awt.Dimension(99, 25));
         btnIncluir.setPreferredSize(new java.awt.Dimension(99, 25));
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Alterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(99, 25));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         txtTaxaComissao.setEnabled(false);
 
@@ -274,49 +294,159 @@ public class GuiVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        if (ValidaCPF.isValido(txtCpf.getText())) {
-            System.out.println("Valido");
+        if (!ValidaCPF.isValido(txtCpf.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Confira o CPF e tente novamente", "CPF Inválido", JOptionPane.INFORMATION_MESSAGE);
+            txtCpf.requestFocus();
+            return;
         }
+        
+        Vendedor vendedor = (Vendedor) cadastroVend.stream().filter(cad -> cad.getCpf().equals(txtCpf.getText())).findFirst().orElse(null);
+        
+        if (vendedor != null) {
+            txtNome.setText(vendedor.getNome());
+            txtEndereco.setText(vendedor.getEndereco());
+            txtCidade.setText(vendedor.getCidade());
+            cmbUf.setSelectedItem(vendedor.getUf());
+            txtCep.setText(vendedor.getCep());
+            txtDdd.setText(vendedor.getDdd());
+            txtTelefone.setText(vendedor.getTelefone());
+            txtSalarioBase.setText(String.valueOf((vendedor.getSalarioBase())));
+            txtTaxaComissao.setText(String.valueOf((vendedor.getTaxaComissao())));
+            btnConsultar.setEnabled(false);
+            btnIncluir.setEnabled(false);
+            btnAlterar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+        } else {
+            btnConsultar.setEnabled(false);
+            btnIncluir.setEnabled(true);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+            txtNome.requestFocus();
+        }
+        
+        txtCpf.setEnabled(false);
+        txtNome.setEnabled(true);
+        txtEndereco.setEnabled(true);
+        txtCidade.setEnabled(true);
+        cmbUf.setEnabled(true);
+        txtCep.setEnabled(true);
+        txtDdd.setEnabled(true);
+        txtTelefone.setEnabled(true);
+        txtSalarioBase.setEnabled(true);
+        txtTaxaComissao.setEnabled(true);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        Pessoa vendedor = new Vendedor(txtCpf.getText(),txtNome.getText(), Double.parseDouble(txtSalarioBase.getText()));
+        vendedor.setCep(txtCep.getText());
+        vendedor.setCidade(txtCidade.getText());
+        vendedor.setDdd(txtDdd.getText());
+        vendedor.setTelefone(txtTelefone.getText());
+        vendedor.setEndereco(txtEndereco.getText());
+        ((Vendedor)vendedor).setTaxaComissao(Double.parseDouble(txtTaxaComissao.getText()));
+        vendedor.setUf(String.valueOf(cmbUf.getSelectedItem()));
+        cadastroVend.add(vendedor);
+        
+        txtCpf.setText(null);
+        txtNome.setText(null);
+        txtEndereco.setText(null);
+        txtCidade.setText(null);
+        cmbUf.setSelectedIndex(0);
+        txtCep.setText(null);
+        txtDdd.setText(null);
+        txtTelefone.setText(null);
+        txtSalarioBase.setText(null);
+        txtTaxaComissao.setText(null);
+        btnConsultar.setEnabled(true);
+        btnIncluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        txtCpf.setEnabled(true);
+        txtNome.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtCidade.setEnabled(false);
+        cmbUf.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtDdd.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtSalarioBase.setEnabled(false);
+        txtTaxaComissao.setEnabled(false);
+        txtCpf.requestFocus();
+    }//GEN-LAST:event_btnIncluirActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GuiVendedor().setVisible(true);
-            }
-        });
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        txtCpf.setEnabled(false);
         
+        Vendedor vendedor = (Vendedor) cadastroVend.stream().filter(cad -> cad.getCpf().equals(txtCpf.getText())).findFirst().orElse(null);
+
+        vendedor.setNome(txtNome.getText());
+        vendedor.setCep(txtCep.getText());
+        vendedor.setCidade(txtCidade.getText());
+        vendedor.setDdd(txtDdd.getText());
+        vendedor.setEndereco(txtEndereco.getText());
+        vendedor.setTelefone(txtTelefone.getText());
+        vendedor.setUf(String.valueOf(cmbUf.getSelectedItem()));
+        ((Vendedor)vendedor).setSalarioBase(Double.parseDouble(txtSalarioBase.getText()));
+        ((Vendedor)vendedor).setTaxaComissao(Double.parseDouble(txtTaxaComissao.getText()));
         
+        txtCpf.setText(null);
+        txtNome.setText(null);
+        txtEndereco.setText(null);
+        txtCidade.setText(null);
+        cmbUf.setSelectedIndex(0);
+        txtCep.setText(null);
+        txtDdd.setText(null);
+        txtTelefone.setText(null);
+        txtSalarioBase.setText(null);
+        txtTaxaComissao.setText(null);
+        btnConsultar.setEnabled(true);
+        btnIncluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        txtCpf.setEnabled(true);
+        txtNome.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtCidade.setEnabled(false);
+        cmbUf.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtDdd.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtSalarioBase.setEnabled(false);
+        txtTaxaComissao.setEnabled(false);
+        txtCpf.requestFocus();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Vendedor vendedor = (Vendedor) cadastroVend.stream().filter(cad -> cad.getCpf().equals(txtCpf.getText())).findFirst().orElse(null);
+        cadastroVend.remove(vendedor);
         
-    }
+        txtCpf.setText(null);
+        txtNome.setText(null);
+        txtEndereco.setText(null);
+        txtCidade.setText(null);
+        cmbUf.setSelectedIndex(0);
+        txtCep.setText(null);
+        txtDdd.setText(null);
+        txtTelefone.setText(null);
+        txtSalarioBase.setText(null);
+        txtTaxaComissao.setText(null);
+        btnConsultar.setEnabled(true);
+        btnIncluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        txtCpf.setEnabled(true);
+        txtNome.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtCidade.setEnabled(false);
+        cmbUf.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtDdd.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtSalarioBase.setEnabled(false);
+        txtTaxaComissao.setEnabled(false);
+        txtCpf.requestFocus();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -344,4 +474,5 @@ public class GuiVendedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtTaxaComissao;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+    private ArrayList<Pessoa> cadastroVend;
 }

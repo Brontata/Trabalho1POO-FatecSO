@@ -15,11 +15,14 @@ import javax.swing.JOptionPane;
  * @author Guilherme
  */
 public class GuiMenu extends javax.swing.JFrame {
-    GuiCliente guiCliente = new GuiCliente();
-    GuiVendedor guiVendedor = new GuiVendedor();
-    GuiProduto guiProduto = new GuiProduto();
+    GuiCliente guiCliente;
+    GuiVendedor guiVendedor;
+    GuiProduto guiProduto;
     
     public GuiMenu() {
+        this.guiCliente = new GuiCliente(cadCliVend);
+        this.guiVendedor = new GuiVendedor(cadCliVend);
+        this.guiProduto = new GuiProduto(cadProd);
         initComponents();
         
     }

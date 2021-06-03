@@ -12,20 +12,24 @@ package fatec.poo.model;
  */
 public class Produto {
     
-    private String codigo;
+    private int codigo;
     private String descricao;
     private double qtdeEstoque;
     private String unidadeMedida;
     private double preco;
     private double estoqueMinimo;
 
-    public Produto(String codigo, String descricao) {
+    public Produto(int codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 
     public void setDescricao(String descricao) {
