@@ -5,6 +5,9 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.model.Pedido;
+import java.util.ArrayList;
+
 /**
  *
  * @author luizj
@@ -16,6 +19,10 @@ public class GuiPedido extends javax.swing.JFrame {
      */
     public GuiPedido() {
         initComponents();
+    }
+
+    GuiPedido(ArrayList<Pedido> cadPedido) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -81,10 +88,12 @@ public class GuiPedido extends javax.swing.JFrame {
         jLabel3.setText("Data do pedido");
 
         txtDataPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtDataPedido.setEnabled(false);
 
         jLabel4.setText("Forma de pagamento");
 
         cmbFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "À vista", "À prazo" }));
+        cmbFormaPagamento.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,14 +145,17 @@ public class GuiPedido extends javax.swing.JFrame {
         jLabel5.setText("CPF Cliente");
 
         btnConsultarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Consultar.png"))); // NOI18N
+        btnConsultarCliente.setEnabled(false);
 
         txtNomeCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtNomeCliente.setEnabled(false);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpf.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,14 +195,17 @@ public class GuiPedido extends javax.swing.JFrame {
         jLabel6.setText("CPF vendedor");
 
         btnConsultarVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Consultar.png"))); // NOI18N
+        btnConsultarVendedor.setEnabled(false);
 
         txtNomeVendedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtNomeVendedor.setEnabled(false);
 
         try {
             txtCPFVendedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPFVendedor.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -230,16 +245,24 @@ public class GuiPedido extends javax.swing.JFrame {
         jLabel7.setText("Código do produto");
 
         btnConsultarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Consultar.png"))); // NOI18N
+        btnConsultarProduto.setEnabled(false);
 
         txtNomeProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtNomeProduto.setEnabled(false);
+
+        txtCodigoProduto.setEnabled(false);
 
         jLabel11.setText("Qtde vendida");
 
+        txtQuantidadeVendida.setEnabled(false);
+
         btnRemoverItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Remover.png"))); // NOI18N
         btnRemoverItem.setText("Remover Item");
+        btnRemoverItem.setEnabled(false);
 
         btnInserirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Inserir.png"))); // NOI18N
         btnInserirItem.setText("Adicionar Item");
+        btnInserirItem.setEnabled(false);
 
         tableItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,7 +276,11 @@ public class GuiPedido extends javax.swing.JFrame {
 
         jLabel12.setText("Valor Total do pedido");
 
+        txtValorTotal.setEnabled(false);
+
         jLabel13.setText("Quantidade de itens pedidos");
+
+        txtQtdeItensVendidos.setEnabled(false);
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Sair.png"))); // NOI18N
         btnSair.setText("Sair");

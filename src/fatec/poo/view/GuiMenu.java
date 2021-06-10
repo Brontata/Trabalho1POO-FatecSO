@@ -5,6 +5,7 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.model.Pedido;
 import fatec.poo.model.Pessoa;
 import fatec.poo.model.Produto;
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ public class GuiMenu extends javax.swing.JFrame {
     GuiCliente guiCliente;
     GuiVendedor guiVendedor;
     GuiProduto guiProduto;
-    
+    GuiPedido guiPedido;
     public GuiMenu() {
         this.guiCliente = new GuiCliente(cadCliVend);
         this.guiVendedor = new GuiVendedor(cadCliVend);
         this.guiProduto = new GuiProduto(cadProd);
+        this.guiPedido = new GuiPedido();
         initComponents();
         
     }
@@ -45,7 +47,7 @@ public class GuiMenu extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         btnSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        btnEmitirPedido = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -96,8 +98,13 @@ public class GuiMenu extends javax.swing.JFrame {
 
         jMenu2.setLabel("Pedido");
 
-        jMenuItem4.setLabel("Emitir Pedido");
-        jMenu2.add(jMenuItem4);
+        btnEmitirPedido.setLabel("Emitir Pedido");
+        btnEmitirPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmitirPedidoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btnEmitirPedido);
 
         jMenuBar1.add(jMenu2);
 
@@ -136,6 +143,10 @@ public class GuiMenu extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnEmitirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirPedidoActionPerformed
+        guiPedido.setVisible(true);
+    }//GEN-LAST:event_btnEmitirPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +187,7 @@ public class GuiMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnClientes;
+    private javax.swing.JMenuItem btnEmitirPedido;
     private javax.swing.JMenuItem btnProdutos;
     private javax.swing.JMenuItem btnSair;
     private javax.swing.JMenuItem btnVendedores;
@@ -183,9 +195,9 @@ public class GuiMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
     private ArrayList<Pessoa> cadCliVend= new ArrayList<Pessoa>();
     private ArrayList<Produto>  cadProd= new ArrayList<Produto>();
+    private ArrayList<Pedido> cadPedido = new ArrayList<Pedido>();
 }
